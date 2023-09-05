@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe "User Dashboard page '/users/:id'", type: :feature do
   before(:each) do
-    @user_1 = User.create!(name: 'Jimmy', email: 'movie_buff333@gmail.com', password: "a")
-    @user_2 = User.create!(name: 'Timmy', email: 'i_hate_movies@gmail.com', password: "a")
-    @user_3 = User.create!(name: 'Tammy', email: 'gamer4134@gmail.com', password: "a")
-    @user_4 = User.create!(name: 'Sammy', email: 'moives_are_okay_i_guess@gmail.com', password: "a")
+    @user_1 = User.create!(name: 'Jimmy', email: 'movie_buff333@gmail.com', password: "asd", password_confirmation: "asd")
+    @user_2 = User.create!(name: 'Timmy', email: 'i_hate_movies@gmail.com', password: "asd", password_confirmation: "asd")
+    @user_3 = User.create!(name: 'Tammy', email: 'gamer4134@gmail.com', password: "asd", password_confirmation: "asd")
+    @user_4 = User.create!(name: 'Sammy', email: 'moives_are_okay_i_guess@gmail.com', password: "asd", password_confirmation: "asd")
 
     @movie = Movie.new({
                          id: 321,

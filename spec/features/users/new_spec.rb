@@ -12,6 +12,7 @@ RSpec.describe 'User Registration' do
       fill_in :user_name, with: username
       fill_in :user_email, with: email
       fill_in :user_password, with: password
+      fill_in :user_password_confirmation, with: password
       click_button 'Register'
 
       user = User.last
