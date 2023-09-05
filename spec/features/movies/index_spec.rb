@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe "Movie Results Page '/users/:id/movies'", type: :feature do
   before(:each) do
-    @user_1 = User.create!(name: 'Jimmy', email: 'movie_buff333@gmail.com')
-    @user_2 = User.create!(name: 'Timmy', email: 'i_hate_movies@gmail.com')
-    @user_3 = User.create!(name: 'Tammy', email: 'gamer4134@gmail.com')
+    @user_1 = User.create!(name: 'Jimmy', email: 'movie_buff333@gmail.com', password: "weeeeeeee")
+    @user_2 = User.create!(name: 'Timmy', email: 'i_hate_movies@gmail.com', password: "weeeeeeee")
+    @user_3 = User.create!(name: 'Tammy', email: 'gamer4134@gmail.com', password: "weeeeeeee")
   end
 
   describe 'top rated movies' do
