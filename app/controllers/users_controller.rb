@@ -11,17 +11,35 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    @user.email = @user.email.downcase
-    if @user.password != @user.password_confirmation
+    user = User.new(user_params)
+    user.email = user.email.downcase
+    if user.password != user.password_confirmation
       flash[:error] = "Password and confirmation do not match!"
       render :new
-    elsif @user.save
-      flash[:success] = "Welcome, #{@user.name}!"
-      redirect_to dashboard_path(@user.id)
+    elsif user.save
+      flash[:success] = "Welcome, #{user.name}!"
+      redirect_to dashboard_path(user.id)
     else
       flash[:error] = 'Please fill in all fields.'
       render :new
+    end
+  end
+
+  def login_form; end
+
+  def login
+    begin
+      user = User.find_by(email: params[:email])
+      if user.authenticate(params[:password])
+        flash[:success] = "Welcome, #{user.name}!"
+        redirect_to root_path
+      else
+        flash[:error] = "Sorry, incorrect credentials."
+        render :login_form
+      end
+    rescue
+      flash[:error] = "Sorry, incorrect credentials."
+      render :login_form
     end
   end
 
