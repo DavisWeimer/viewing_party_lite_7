@@ -12,17 +12,19 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user[:email] = @user[:email].downcase
     if @user.save
+        flash[:success] = "Welcome, #{@user.name}!"
       redirect_to dashboard_path(@user.id)
     else
       flash[:error] = 'Please fill in all fields.'
-      redirect_to register_path
+      render :new
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password)
   end
 end
