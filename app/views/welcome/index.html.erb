@@ -1,11 +1,13 @@
-
-<div id="new_user">
-  <%= button_to "Create New User", "/register", method: :get %>
-</div>
-
-<div id="login_user">
-  <%= button_to "Log In", "/login", method: :get %>
-</div>
+<% if current_user %>
+  <%= link_to "Log Out" %>
+<% else %>
+  <div id="new_user">
+    <%= button_to "Create New User", "/register", method: :get %>
+  </div>
+  <div id="login_user">
+    <%= button_to "Log In", "/login", method: :get %>
+  </div>
+<% end %>
 
 <ul id="existing_users">
   <h3>Existing Users</h3>

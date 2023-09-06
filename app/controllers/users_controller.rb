@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       flash[:error] = "Password and confirmation do not match!"
       render :new
     elsif user.save
+      session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.name}!"
       redirect_to dashboard_path(user.id)
     else
@@ -24,13 +25,14 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
+  
   def login_form; end
-
+  
   def login
     user = User.find_by(email: params[:email])
-  
+    
     if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.name}!"
       redirect_to root_path
     else
