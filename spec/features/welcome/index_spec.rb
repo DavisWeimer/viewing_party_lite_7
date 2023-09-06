@@ -26,14 +26,14 @@ RSpec.describe 'Landing Page', type: :feature do
       expect(current_path).to eq(register_path)
     end
 
-    # it 'displays a list of existing users' do
-    #   visit root_path
-    #   within '#existing_users' do
-    #     expect(page).to have_content('movie_buff333@gmail.com')
-    #     expect(page).to have_content('i_hate_movies@gmail.com')
-    #     expect(page).to have_content('gamer4134@gmail.com')
-    #   end
-    # end
+    it 'displays a list of existing users emails' do
+      visit root_path
+      within '#existing_users_emails' do
+        expect(page).to have_content('movie_buff333@gmail.com')
+        expect(page).to have_content('i_hate_movies@gmail.com')
+        expect(page).to have_content('gamer4134@gmail.com')
+      end
+    end
 
     # it "each name is a link to it's user dashboard" do
     #   visit root_path
