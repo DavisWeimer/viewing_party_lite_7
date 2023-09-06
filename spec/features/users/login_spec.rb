@@ -54,7 +54,7 @@ RSpec.describe 'User Login' do
       fill_in :email, with: "eeqrueiguqief"
       fill_in :password, with: @user_1.password
       click_on "Log In"
-      
+
       expect(current_path).to eq(login_path)
       expect(page).to have_content("Sorry, incorrect credentials.")
     end
