@@ -2,6 +2,7 @@
 
 class PartiesController < ApplicationController
   before_action :find_user_and_movie, only: %i[new create]
+  before_action :authenticate_user
 
   def new
     @party = Party.new
@@ -22,6 +23,7 @@ class PartiesController < ApplicationController
   def find_user_and_movie
     @user = User.find(params[:user_id])
     @movie = MovieFacade.get_movie(params[:movie_id])
+    session[:url] = request.fullpath
   end
 
   def party_params
@@ -30,5 +32,12 @@ class PartiesController < ApplicationController
 
   def party_user_params
     params.permit(:user_id, :party_id, :host)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:alert] = "Please log in or register to access this page."
+      redirect_to root_path
+    end
   end
 end

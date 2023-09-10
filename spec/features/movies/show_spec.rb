@@ -7,6 +7,12 @@ RSpec.describe 'Movie Show Page' do
     @user_1 = User.create!(name: 'Jimmy', email: 'movie_buff333@gmail.com', password: "asd", password_confirmation: "asd")
     @user_2 = User.create!(name: 'Timmy', email: 'i_hate_movies@gmail.com', password: "asd", password_confirmation: "asd")
     @user_3 = User.create!(name: 'Tammy', email: 'gamer4134@gmail.com', password: "asd", password_confirmation: "asd")
+    
+    visit root_path
+    click_button "Log In"
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_on "Log In"
   end
   describe 'When I visit a movie show page', :vcr do
     it 'I see a button to create a viewing party' do

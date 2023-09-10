@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_190943) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_221950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_190943) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "password_confirmation"
+    t.integer "role", default: 0
   end
 
   add_foreign_key "party_users", "parties"

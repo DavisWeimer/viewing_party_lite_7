@@ -35,14 +35,6 @@ RSpec.describe 'Landing Page', type: :feature do
       end
     end
 
-    # it "each name is a link to it's user dashboard" do
-    #   visit root_path
-    #   within '#existing_users' do
-    #     click_link(@user_1.email)
-    #   end
-    #   expect(current_path).to eq(dashboard_path(@user_1.id))
-    # end
-
     it 'has a home link on every page' do
       visit root_path
       click_link('Home')
@@ -51,6 +43,15 @@ RSpec.describe 'Landing Page', type: :feature do
       visit dashboard_path(@user_1.id)
       click_link('Home')
       expect(current_path).to eq(root_path)
+    end
+  end
+  describe "Login redirect" do
+    it "does not allow users dashboard access without logging in" do
+      visit root_path
+
+      visit dashboard_path(@user_1.id)
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content("Please log in or register to access this page.")
     end
   end
 end

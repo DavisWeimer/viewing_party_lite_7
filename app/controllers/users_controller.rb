@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :authenticate_user, only: [:show]
+
   def new
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
-    @parties = PartyUser.where(host: true)
+    if current_user
+      @user = User.find(params[:id])
+      @parties = PartyUser.where(host: true)
+    else  
+      flash[:error] = "Please sign in or Create new user!"
+      redirect_to root_path
+    end
   end
 
   def create
@@ -51,5 +58,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:alert] = "Please log in or register to access this page."
+      redirect_to root_path
+    end
   end
 end
