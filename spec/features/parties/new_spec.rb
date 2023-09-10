@@ -17,10 +17,16 @@ RSpec.describe 'New Viewing Party' do
                          genres: [{ id: 35, name: 'Comedy' }, { id: 10_749, name: 'Romance' }],
                          overview: 'When an Italian man comes out of the closet, it affects both his life and his crazy family.'
                        })
-  end
-
+                      end
+                      
   describe 'When I visit the new viewing party page' do
     it 'displays a form to create a new viewing party', :vcr do
+      visit root_path
+      click_button "Log In"
+      fill_in :email, with: @user_1.email
+      fill_in :password, with: @user_1.password
+      click_on "Log In"
+
       visit new_party_path(@user_1.id, @movie.id)
 
       expect(page).to have_content('Mambo Italiano')

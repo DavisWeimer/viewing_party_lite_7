@@ -36,6 +36,13 @@ RSpec.describe "User Dashboard page '/users/:id'", type: :feature do
     @host_2 = PartyUser.create!(user_id: @user_2.id, party_id: @party_2.id, host: true)
     PartyUser.create!(user_id: @user_1.id, party_id: @party_2.id, host: false)
     PartyUser.create!(user_id: @user_3.id, party_id: @party_2.id, host: false)
+
+    visit root_path
+
+    click_button "Log In"
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_on "Log In"
   end
 
   describe "When I visit a user's dashboard page", :vcr do
